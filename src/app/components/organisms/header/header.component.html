@@ -1,1 +1,20 @@
-<p>header works!</p>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar text-decoration-none ml-3" href="/articles">
+            <h1>NEWS<span class="text-secondary font-weight-normal">PORTAL</span></h1>
+        </a>
+        <div *ngIf="username; else elseBlock" class="navbar mr-3">
+            <span class="navbar-text mr-4">
+                {{username}}
+            </span>
+            <button class="btn btn-primary" type="submit">SIGN OUT</button>
+        </div>
+        <ng-template #elseBlock>
+            <div class="btn-group mr-3">
+                <button class="btn btn-primary mx-1" type="submit">SIGN IN</button>
+                <button class="btn btn-secondary mx-1" type="submit">SING UP</button>
+            </div>
+        </ng-template>
+    </nav>
+    <h2 class="text-center text-info py-3 ">{{headerInfo}}</h2>
+</header>
