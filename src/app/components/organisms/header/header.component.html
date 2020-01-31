@@ -1,10 +1,10 @@
 <header>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-dark">
         <a class="navbar text-decoration-none ml-3" href="/articles">
-            <h1>NEWS<span class="text-secondary font-weight-normal">PORTAL</span></h1>
+            <h1>NEWS<span class="text-light font-weight-normal">PORTAL</span></h1>
         </a>
         <div *ngIf="username; else elseBlock" class="navbar mr-3">
-            <span class="navbar-text mr-4">
+            <span class="navbar-text text-light mr-4">
                 {{username}}
             </span>
             <button class="btn btn-primary" type="submit">SIGN OUT</button>
@@ -16,5 +16,6 @@
             </div>
         </ng-template>
     </nav>
-    <h2 class="text-center text-info py-3 ">{{headerInfo}}</h2>
+    <h2 class="text-center text-light py-3 bg-info mb-0">{{headerInfo}}</h2>
+    <app-filter-panel></app-filter-panel>
 </header>
