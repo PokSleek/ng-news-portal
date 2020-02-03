@@ -20,6 +20,10 @@ const routes: Routes = [
     component: ArticleFormComponent,
   },
   {
+    path: 'edit',
+    component: ArticleFormComponent,
+  },
+  {
     path: 'create',
     component: ArticleFormComponent,
   },
@@ -30,7 +34,8 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'articles',
-    pathMatch: 'full' },
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
