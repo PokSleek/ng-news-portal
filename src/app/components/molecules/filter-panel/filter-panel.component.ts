@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, OnChanges, Output, EventEmitter, Input} from '@angular/core';
 
 import { NewsApiService } from '../../../services/news-api.service';
 import { Router } from '@angular/router';
@@ -17,42 +17,41 @@ export class FilterPanelComponent implements OnInit {
   @Output() filterCreatedByMeChange: EventEmitter<boolean> = new EventEmitter();
   @Output() sourceChange: EventEmitter<string> = new EventEmitter();
 
-  sources: Array<SourceModel>;
-  selectedSource: string;
-  text: string;
-
-
+  private sources: Array<SourceModel>;
+  private selectedSource: string;
+  private queryFilter: string;
+  private isCreatedByMeFilter: boolean;
 
   constructor(
     private newsApiService: NewsApiService,
     private router: Router,
-  ) { }
+  ) {
+    this.selectedSource = 'abc-news';
+    this.sources = [];
+    this.queryFilter = '';
+    this.isCreatedByMeFilter = false;
+  }
+
 
   ngOnInit(): void {
-    this.sources = [];
-    this.text = '';
     this.newsApiService.getSource()
       .then(sources => {
         this.sources = sources;
-        this.selectedSource = sources[0].id;
+        this.onSourceChange(sources[0].id);
       });
   }
 
-  onSourceChange(): void {
-    this.sourceChange.emit(this.selectedSource);
+  onSourceChange(source: string): void {
+    this.selectedSource = source;
+    this.sourceChange.emit(source);
   }
 
-  OnChanges(): void {
-    console.log(this);
+  onQueryFilter(): void {
+    this.filterNewsChange.emit({q: this.queryFilter, sources: this.selectedSource});
   }
 
-  onFilterNews(): void {
-    this.filterNewsChange.emit({q: this.text, sources: this.selectedSource});
-  }
-
-  onFilterNewsCreatedByMe(event: any): void {
-    console.log(event.target.checked);
-    this.filterCreatedByMeChange.emit(event.target.checked);
+  onCreatedByMeFilter($event: any): void {
+    this.isCreatedByMeFilter = $event.target.checked;
   }
 
   onGoToEdit(): void {

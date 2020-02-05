@@ -1,3 +1,7 @@
+<h2 class="text-center text-light py-2 bg-info mb-0">{{headerInfo | uppercase}}</h2>
+<app-filter-panel
+  (sourceChange)="onSourceChange($event)"
+></app-filter-panel>
 <div class="container">
   <ng-content></ng-content>
 </div>

@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  headerInfo: string;
 
-  constructor() { }
+  constructor() {
+    this.headerInfo = 'abc-news';
+  }
 
   ngOnInit() {
   }
 
+  onSourceChange(newSource: string) {
+    this.headerInfo = newSource;
+  }
 }

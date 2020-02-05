@@ -1,4 +1,4 @@
-import SourceModel from './source.model';
+import { SourceModel } from './source.model';
 
 export class ArticleModel {
   constructor(
