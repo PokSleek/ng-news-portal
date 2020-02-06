@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shortened-article',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShortenedArticleComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  redirectToArticle(): void {
+    this.router.navigate(['/article/123']);
+  }
+
+  onDelete(): void {
+    console.log('Deleted');
+  }
+
+  onEdit(): void {
+    console.log('Edited');
+    this.router.navigate(['/edit/123']);
   }
 
 }

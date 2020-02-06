@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-form',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  onSave(): void {
+    console.log('Saved');
+    this.router.navigate(['/articles']);
+  }
+
+  onCancel(): void {
+    console.log('Canceled');
+    this.router.navigate(['/articles']);
   }
 
 }

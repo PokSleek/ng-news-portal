@@ -1,8 +1,5 @@
 <h2 class="text-center text-light py-2 bg-info mb-0">{{headerInfo | uppercase}}</h2>
-<app-filter-panel
-  (headerChange)="onSourceChange($event)"
-></app-filter-panel>
-<div class="container">
+<app-filter-panel (headerChange)="onHeaderChange($event)"></app-filter-panel>
+<div class="container pb-5 mt-4">
   <ng-content></ng-content>
 </div>
-

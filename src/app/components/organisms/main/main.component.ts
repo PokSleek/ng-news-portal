@@ -9,13 +9,13 @@ export class MainComponent implements OnInit {
   headerInfo: string;
 
   constructor() {
-    this.headerInfo = 'abc-news';
+    this.headerInfo = 'Select Source';
   }
 
   ngOnInit() {
   }
 
-  onSourceChange(newSource: string) {
-    this.headerInfo = newSource;
+  onHeaderChange(newSource: string) {
+    this.headerInfo = newSource ? newSource : 'Select Source';
   }
 }

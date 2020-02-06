@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  onDelete(): void {
+    console.log('Deleted');
+  }
+
+  onEdit(): void {
+    console.log('Edited');
+    this.router.navigate(['/edit/123']);
   }
 
 }

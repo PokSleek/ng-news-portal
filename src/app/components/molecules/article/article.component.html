@@ -1,1 +1,26 @@
-<p>article works!</p>
+<div class="container my-3">
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-3">
+        <img src="" class="card-img" alt="image">
+      </div>
+      <div class="col-md-7">
+        <div class="card-body">
+          <p class="card-subtitle text-secondary">Source name</p>
+          <h3 class="card-title">Title</h3>
+          <p class="card-text">Content</p>
+          <p class="card-text border-top mb-1"><small class="text-muted">Published At</small></p>
+          <p class="card-text"><small class="text-muted">Author</small></p>
+        </div>
+      </div>
+      <div class="col-md-2 d-flex flex-column">
+        <button type="button" class="btn btn-primary m-1" (click)="onDelete()">
+          Delete
+        </button>
+        <button type="button" class="btn btn-secondary m-1" (click)="onEdit()">
+          Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

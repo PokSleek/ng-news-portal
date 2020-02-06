@@ -26,7 +26,7 @@ export class FilterPanelComponent implements OnInit {
     private newsApiService: NewsApiService,
     private router: Router,
   ) {
-    this.selectedSource = 'abc-news';
+    // this.selectedSource = '';
     this.sources = [];
     this.queryFilter = '';
     this.isCreatedByMeFilter = false;
@@ -34,11 +34,11 @@ export class FilterPanelComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.newsApiService.getSource()
-      .then(sources => {
-        this.sources = sources;
-        this.onSourceChange(sources[0].id);
-      });
+    // this.newsApiService.getSource()
+    //   .then(sources => {
+    //     this.sources = sources;
+    //     // this.onSourceChange(sources[0].id);
+    //   });
   }
 
   onSourceChange(source: string): void {
@@ -62,8 +62,7 @@ export class FilterPanelComponent implements OnInit {
     }
   }
 
-  onGoToEdit(): void {
-    console.log('redirected to edit');
-    // this.router.navigate(['/edit']);
+  onGoToCreate(): void {
+    this.router.navigate(['/create']);
   }
 }
