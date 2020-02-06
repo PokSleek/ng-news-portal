@@ -15,11 +15,11 @@ import { FilterParams } from '../../../interfaces';
 export class FilterPanelComponent implements OnInit {
   @Output() filterNewsChange: EventEmitter<FilterParams> = new EventEmitter();
   @Output() filterCreatedByMeChange: EventEmitter<boolean> = new EventEmitter();
-  @Output() sourceChange: EventEmitter<string> = new EventEmitter();
+  @Output() headerChange: EventEmitter<string> = new EventEmitter();
 
   private sources: Array<SourceModel>;
   private selectedSource: string;
-  private queryFilter: string;
+  private readonly queryFilter: string;
   private isCreatedByMeFilter: boolean;
 
   constructor(
@@ -43,18 +43,27 @@ export class FilterPanelComponent implements OnInit {
 
   onSourceChange(source: string): void {
     this.selectedSource = source;
-    this.sourceChange.emit(source);
+    this.headerChange.emit(source);
   }
 
   onQueryFilter(): void {
-    this.filterNewsChange.emit({q: this.queryFilter, sources: this.selectedSource});
+    console.log({ q: this.queryFilter, sources: this.selectedSource });
+    this.filterNewsChange.emit({ q: this.queryFilter, sources: this.selectedSource });
   }
 
   onCreatedByMeFilter($event: any): void {
-    this.isCreatedByMeFilter = $event.target.checked;
+    const { checked } = $event.target;
+    this.isCreatedByMeFilter = checked;
+
+    if (checked) {
+      this.headerChange.emit('Created by me');
+    } else {
+      this.headerChange.emit(this.selectedSource);
+    }
   }
 
   onGoToEdit(): void {
-    this.router.navigate(['/edit']);
+    console.log('redirected to edit');
+    // this.router.navigate(['/edit']);
   }
 }
