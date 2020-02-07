@@ -34,11 +34,15 @@ export class FilterPanelComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.newsApiService.getSource()
-    //   .then(sources => {
-    //     this.sources = sources;
-    //     // this.onSourceChange(sources[0].id);
-    //   });
+    this.newsApiService.getSource()
+      .then(sources => {
+        this.sources = sources;
+        // this.onSourceChange(sources[0].id);
+      });
+  }
+
+  getArticles(): void {
+
   }
 
   onSourceChange(source: string): void {

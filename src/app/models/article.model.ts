@@ -11,7 +11,7 @@ export class ArticleModel {
     public urlToImage: string = '',
     public publishedAt: string = '',
     public content: string = '',
-    public createdByMe?: boolean,
+    public isCreatedByMe?: boolean,
   ) {
     this.id = id;
     this.source = source;
