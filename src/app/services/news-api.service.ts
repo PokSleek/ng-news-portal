@@ -7,9 +7,6 @@ import { AppModule } from '../app.module';
 import { FilterParams, NewsResponse, SourceResponse } from '../interfaces';
 import { ArticleModel, SourceModel } from '../models';
 
-
-const newsListCreatedByMe = [];
-
 @Injectable({
   providedIn: 'root',
 })
@@ -35,38 +32,9 @@ export class NewsApiService {
     return this.http
       .get<NewsResponse>(`${this.BASE_URL}${this.NEWS_ENDPOINT}${query}${this.API_KEY}`)
       .toPromise()
-      .then((response: NewsResponse) => response.articles.concat(newsListCreatedByMe))
-      .then(news => {
-        console.log(news);
-        return news = createdByMeParam ? news.filter(artcile => artcile.createdByMe) : news
-      })
+      .then((response: NewsResponse) => response.articles)
       .catch(this.handleError);
   }
-
-  getOneNews(id: string): ArticleModel {
-    return newsListCreatedByMe.find(oneNews => oneNews.id === id);
-  }
-
-  createNews(news: ArticleModel): void {
-    newsListCreatedByMe.push(news);
-  }
-
-  updateNews(news: ArticleModel): void {
-    const index = newsListCreatedByMe.findIndex(oneNews => oneNews.id === news.id);
-
-    if (index > -1) {
-      newsListCreatedByMe.splice(index, 1, news);
-    }
-  }
-
-  deleteNews(news: ArticleModel): void {
-    const index = newsListCreatedByMe.findIndex(oneNews => oneNews.id === news.id);
-
-    if (index > -1) {
-      newsListCreatedByMe.splice(index, 1);
-    }
-  }
-
 
   private handleError(error: Error): Promise<any> {
     console.log('An error occurred', error);
