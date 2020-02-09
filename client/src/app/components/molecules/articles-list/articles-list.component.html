@@ -1,0 +1,7 @@
+<div class="container">
+    <app-shortened-article *ngFor="let article of newsApiService.getArticles()"
+        [article]="article"
+    >
+    </app-shortened-article>
+    <button type="button" class="btn btn-primary btn-lg btn-block">Load more</button>
+</div>
