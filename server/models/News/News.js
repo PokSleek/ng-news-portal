@@ -2,13 +2,17 @@ import mongoose from 'mongoose';
 
 const NewsSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  id: String,
-  category: String,
-  country: String,
+  source: {
+    id: String,
+    name: String,
+  },
+  author: String,
+  title: String,
   description: String,
-  language: String,
-  name: String,
   url: String,
+  urlToImage: String,
+  publishedAt: String,
+  content: String,
 });
 
-export const News = mongoose.model('News', NewsSchema);
+export const News = mongoose.model('Article', NewsSchema);

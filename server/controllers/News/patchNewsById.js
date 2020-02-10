@@ -9,6 +9,7 @@ export const patchNewsById = (req, res) => {
     const { id } = req.params;
     const { data } = req.body;
 
+
     if (isEmpty(data)) {
         return res.status(400).json({
             message: 'Bad request: Empty "req.body.data"',
@@ -17,6 +18,7 @@ export const patchNewsById = (req, res) => {
     }
 
     const uncorrectedFields = getUncorrectedFields(data, newsSchema);
+    console.log(uncorrectedFields, ' :: ', req.body);
     if (!isEmpty(uncorrectedFields)) {
         return res.status(400).json({
             message: 'Bad request: uncorrected fields',

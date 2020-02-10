@@ -4,7 +4,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Heading</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                    <input [(ngModel)]="article.title" type="text" class="form-control" id="exampleFormControlInput1"
                         name="exampleFormControlInput1" required>
                 </div>
             </div>
@@ -13,7 +13,6 @@
                     <div class="row no-gutters justify-content-between">
                         <label class="mr-3" for="exampleFormControlInput3">Image</label>
                         <div class="d-inline-flex">
-
                             <div class="form-check mx-3">
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
                                     value="option1" checked>
@@ -23,15 +22,14 @@
                             </div>
                             <div class="form-check mx-3">
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                                    value="option2">
+                                    value="option2" disabled>
                                 <label class="form-check-label" for="gridRadios2">
                                     File
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <input type="url" class="form-control" id="exampleFormControlInput3" name="exampleFormControlInput3"
-                        required>
+                    <input [(ngModel)]="article.urlToImage" type="url" class="form-control" id="exampleFormControlInput3" name="exampleFormControlInput3">
                 </div>
             </div>
         </div>
@@ -39,15 +37,15 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleFormControlInput2">Short description</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput2"
-                        name="exampleFormControlInput2" required>
+                    <input [(ngModel)]="article.description" type="text" class="form-control" id="exampleFormControlInput2"
+                        name="exampleFormControlInput2">
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label for="exampleFormControlInput4">Date</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput4"
-                        name="exampleFormControlInput4" required>
+                    <input [(ngModel)]="article.publishedAt" type="text" class="form-control" id="exampleFormControlInput4"
+                        name="exampleFormControlInput4" disabled>
                 </div>
             </div>
         </div>
@@ -55,19 +53,19 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Content</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="exampleFormControlTextarea1"
+                    <textarea [(ngModel)]="article.content" class="form-control" id="exampleFormControlTextarea1" name="exampleFormControlTextarea1"
                         rows="5" required></textarea>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleFormControlInput5">Autor</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput5"
+                    <label for="exampleFormControlInput5">Author</label>
+                    <input [(ngModel)]="article.author" type="text" class="form-control" id="exampleFormControlInput5"
                         name="exampleFormControlInput5" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput6">Source URL</label>
-                    <input type="url" class="form-control" id="exampleFormControlInput6" name="exampleFormControlInput6"
+                    <input [(ngModel)]="article.source.id" type="url" class="form-control" id="exampleFormControlInput6" name="exampleFormControlInput6"
                         required>
                 </div>
                 <div class="row no-gutters">

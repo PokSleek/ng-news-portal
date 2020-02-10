@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { Router } from '@angular/router';
 import {ArticleModel} from '../../../models';
+import { NewsApiService } from 'src/app/services/news-api.service';
 
 @Component({
   selector: 'app-shortened-article',
@@ -9,10 +10,13 @@ import {ArticleModel} from '../../../models';
 })
 export class ShortenedArticleComponent implements OnInit, OnChanges {
   @Input() article: ArticleModel;
+  @Input() isCreatedByMe: boolean;
+
   public contentGrid: string;
   public imageGrid: string;
 
   constructor(
+    private newsApiService: NewsApiService,
     private router: Router
   ) {}
 
@@ -24,26 +28,42 @@ export class ShortenedArticleComponent implements OnInit, OnChanges {
   }
 
   recalculateGrid(article: ArticleModel): void {
-    const { isCreatedByMe, urlToImage } = article;
+    const { urlToImage } = article;
 
-    const imageGridLength = isCreatedByMe ? 4 : 5;
-    const contentGridLength = urlToImage !== 'null' ? 12 - imageGridLength : isCreatedByMe ? 10 : 12;
+    let imageGridLength: number;
+    let contentGridLength: number;
 
-    this.imageGrid = `col-md-${imageGridLength}`;
+    if (this.isCreatedByMe) {
+      if (urlToImage !== 'null') {
+        imageGridLength = 4;
+        contentGridLength = 6;
+      } else {
+        contentGridLength = 6;
+      }
+    } else {
+      if (urlToImage !== 'null') {
+        imageGridLength = 5;
+        contentGridLength = 7;
+      } else {
+        contentGridLength = 12;
+      }
+    }
+
+    this.imageGrid = article.urlToImage ? `col-md-${imageGridLength}` : '';
     this.contentGrid = `col-md-${contentGridLength}`;
   }
 
   redirectToArticle(url: string): void {
-    const { isCreatedByMe } = this.article;
-    isCreatedByMe ? this.router.navigate(['/article/123']) : window.open(url);
+    this.isCreatedByMe ? this.router.navigate(['/article/123']) : window.open(url);
   }
 
   onDelete(): void {
-    console.log('Deleted');
+    this.newsApiService.deleteArticle(this.article._id)
+      .then(() => this.newsApiService.fetchCustomNews());
   }
 
   onEdit(): void {
     console.log('Edited');
-    this.router.navigate(['/edit/123']);
+    this.router.navigate([`edit/${this.article._id}`]);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsApiService } from '../../../services/news-api.service';
 import { ArticleModel } from '../../../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -12,6 +13,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     public newsApiService: NewsApiService,
+    public router: Router
   ) {}
 
   ngOnInit() {

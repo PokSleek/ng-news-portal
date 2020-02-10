@@ -2,20 +2,22 @@ import { SourceModel } from './source.model';
 
 export class ArticleModel {
   constructor(
-    public id: string = '',
-    public source: SourceModel = new SourceModel(),
-    public autor: string = '',
+    public _id?: string,
+    public id?: string,
+    public source: { id: string, name: string } = { id: '',  name: '' },
+    public author: string = '',
     public title: string = '',
     public description: string = '',
     public url: string = '',
     public urlToImage: string = '',
     public publishedAt: string = '',
     public content: string = '',
-    public isCreatedByMe?: boolean,
+    public __v?: string,
+
   ) {
     this.id = id;
     this.source = source;
-    this.autor = autor;
+    this.author = author;
     this.title = title;
     this.description = description;
     this.url = url;

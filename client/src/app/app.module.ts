@@ -17,6 +17,7 @@ import { ShortenedArticleComponent } from './components/molecules/shortened-arti
 import { ArticleFormComponent } from './components/molecules/article-form/article-form.component';
 import { LoginFormComponent } from './components/organisms/login-form/login-form.component';
 import { NewsApiService } from './services/news-api.service';
+import { AuthorisationService } from './services/authorisation.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { NewsApiService } from './services/news-api.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [NewsApiService],
+  providers: [NewsApiService, AuthorisationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

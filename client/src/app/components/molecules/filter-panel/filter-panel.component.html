@@ -1,13 +1,13 @@
 <div class="form-inline justify-content-between py-1 bg-light">
   <div class="input-group mx-3 my-1">
     <select
-      [attr.disabled]="isCreatedByMeFilter ? '' : null"
+      [attr.disabled]="newsApiService.isCreatedByMe ? '' : null"
       class="custom-select mr-sm-2"
       [(ngModel)]="selectedSource"
       (ngModelChange)="onSourceChange($event)"
     >
       <option [ngValue]="undefined" hidden>Select Source</option>
-      <option *ngFor="let source of newsApiService.sources">{{source.id}}</option>
+      <option *ngFor="let source of newsApiService.sources" [ngValue]="source.id">{{source.name}}</option>
     </select>
   </div>
   <div class="input-group mx-3 my-1">
@@ -29,6 +29,7 @@
         type="checkbox"
         class="custom-control-input"
         id="createdByMeFilter"
+        [(ngModel)]="newsApiService.isCreatedByMe"
         (change)="onCreatedByMeFilter($event)"
       >
       <label class="custom-control-label" for="createdByMeFilter">Only created by me</label>

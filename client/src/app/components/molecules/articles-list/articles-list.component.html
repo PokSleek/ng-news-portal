@@ -1,7 +1,8 @@
 <div class="container">
     <app-shortened-article *ngFor="let article of newsApiService.getArticles()"
         [article]="article"
+        [isCreatedByMe]="newsApiService.isCreatedByMe"
     >
     </app-shortened-article>
-    <button type="button" class="btn btn-primary btn-lg btn-block">Load more</button>
+    <button *ngIf="newsApiService.articles.length !== newsApiService.totalArticles" (click)="loadMore()" type="button" class="btn btn-primary btn-lg btn-block">Load more</button>
 </div>

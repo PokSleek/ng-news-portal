@@ -11,23 +11,19 @@ import { newsSchema } from '../../models/News/constants'
 export const postNews = (req, res) => {
     const { data } = req.body;
 
-    const uncorrectedFields = getUncorrectedFields(data, newsSchema);
-    if (!isEmpty(uncorrectedFields)) {
-        return res.status(400).json({
-            message: 'Bad request: uncorrected fields',
-            uncorrectedFields,
-        });
-    }
-
     const article = new News({
         _id: new mongoose.Types.ObjectId(),
-        category: data.category,
-        country: data.country,
-        description: data.description,
-        id: data.id,
-        language: data.language,
-        name: data.name,
-        url: data.url,
+        source: {
+            id: data.source.id || '',
+            name: data.source.name || '',
+        },
+        author: data.author || '',
+        title: data.title || '',
+        description: data.description || '',
+        url: data.url || '',
+        urlToImage: data.urlToImage || '',
+        publishedAt: data.publishedAt || '',
+        content: data.content || '',
     });
 
     article

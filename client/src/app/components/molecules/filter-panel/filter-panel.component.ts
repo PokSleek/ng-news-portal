@@ -19,15 +19,12 @@ export class FilterPanelComponent implements OnInit {
   private selectedSource: string;
   private queryFilter: string;
 
-  public isCreatedByMeFilter: boolean;
-
   constructor(
     private newsApiService: NewsApiService,
     private router: Router,
   ) {
     this.selectedSource = 'abc-news';
     this.queryFilter = '';
-    this.isCreatedByMeFilter = false;
   }
 
 
@@ -40,6 +37,7 @@ export class FilterPanelComponent implements OnInit {
   }
 
   onSourceChange(source: string): void {
+    console.log(source);
     this.queryFilter = '';
     this.newsApiService.fetchArticles({ sources: this.selectedSource });
     this.selectedSource = source;
@@ -52,7 +50,6 @@ export class FilterPanelComponent implements OnInit {
 
   onCreatedByMeFilter($event: any): void {
     const { checked } = $event.target;
-    this.isCreatedByMeFilter = checked;
 
     if (checked) {
       this.headerChange.emit('Created by me');

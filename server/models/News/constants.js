@@ -1,9 +1,13 @@
 export const newsSchema = {
-    id: 'string',
-    category: 'string',
-    country: 'string',
-    description: 'string',
-    language: 'string',
-    name: 'string',
-    url: 'string',
+    source: {
+        id: 'string',
+        name: 'string',
+      },
+      author: 'string',
+      title: 'string',
+      description: 'string',
+      url: 'string',
+      urlToImage: 'string',
+      publishedAt: 'string',
+      content: 'string',
 };

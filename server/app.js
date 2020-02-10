@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+import cors from 'cors';
 
 import { setUpConnection } from './DB/index'
 import { PORT } from './config/server';
@@ -16,8 +17,13 @@ db.once('open', () => {
   console.log('Connected to database');
 });
 
+
+app.use(cors())
+
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  // res.header('Access-Control-Allow-Origin', '*');
+  // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', '*');
   next();
 });
 

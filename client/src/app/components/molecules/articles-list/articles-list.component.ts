@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, OnChanges} from '@angular/core';
-import { NewsApiService } from "../../../services/news-api.service";
-import { ArticleModel } from "../../../models";
+import { NewsApiService } from '../../../services/news-api.service';
+import { ArticleModel } from '../../../models';
 
 @Component({
   selector: 'app-articles-list',
@@ -8,7 +8,7 @@ import { ArticleModel } from "../../../models";
   styleUrls: ['./articles-list.component.scss'],
 })
 export class ArticlesListComponent implements OnInit, OnChanges {
-  articles: ArticleModel[];
+  public articles: ArticleModel[];
 
   constructor(
     private newsApiService: NewsApiService,
@@ -18,11 +18,16 @@ export class ArticlesListComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    this.newsApiService.fetchCustomNews();
+    this.newsApiService.fetchCustomNews()
+      .then(() => console.log(this.newsApiService.customArticles));
   }
 
   ngOnChanges(changes): void {
     console.log(changes);
+  }
+
+  loadMore() {
+    this.newsApiService.loadMore();
   }
 
 }
