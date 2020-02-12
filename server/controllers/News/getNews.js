@@ -1,4 +1,5 @@
 import { News } from '../../models/News/News';
+import { newsBodyBuilder, response, error } from './utils';
 
 export const getNews = (req, res) => {
     News
@@ -6,19 +7,13 @@ export const getNews = (req, res) => {
         .exec()
         .then(data => {
             if (data.length) {
-                res.status(200).json({
-                    message: 'All entries found',
-                    length: data.length,
-                    data,
-                });
+                response(res, 200, newsBodyBuilder('All entries found', data.length, data));
             } else {
-                res.status(404).json({
-                    message: 'No entries found'
-                })
+                response(res, 404, newsBodyBuilder('No entries found', data.length, data));
             }
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ error: err });
+            error(err);
         })
 };

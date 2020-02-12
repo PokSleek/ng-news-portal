@@ -5,3 +5,10 @@ export interface NewsResponse {
   totalResults: number;
   articles: Array<ArticleModel>;
 }
+
+export interface CustomApiResponse {
+  message: string,
+  totalResults?: number,
+  data?: Array<ArticleModel>
+  log?: object,
+}

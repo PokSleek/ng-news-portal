@@ -1,4 +1,5 @@
 import { News } from "../../models/News/News";
+import { error } from './utils';
 
 export const deleteNewsById = (req, res) => {
     const { id } = req.params;
@@ -22,8 +23,6 @@ export const deleteNewsById = (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({
-                error:err
-            })
+            error(err);
         });
 };

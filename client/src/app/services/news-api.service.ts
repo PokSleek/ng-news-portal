@@ -80,6 +80,7 @@ export class NewsApiService {
       .get('http://localhost:7000/news')
       .toPromise()
       .then((response: any) => {
+        console.log(response);
         this.customArticles = response.data;
         return response.data;
       })

@@ -2,7 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { News } from "../../models/News/News";
 
-import { getUncorrectedFields } from "./utils";
+import { error, getUncorrectedFields } from './utils';
 import { newsSchema } from "../../models/News/constants";
 
 export const patchNewsById = (req, res) => {
@@ -52,6 +52,6 @@ export const patchNewsById = (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ error: err });
+            error(err);
         })
 };
