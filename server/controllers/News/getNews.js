@@ -1,20 +1,36 @@
 import { News } from '../../models/News/News';
-import { newsBodyBuilder, response, error } from './utils';
+import { response } from '../utils';
 
-export const getNews = (req, res) => {
-    console.log(req.query);
+export const getNews = async (req, res) => {
+    const { q } = req.query;
+    const limit = Number(req.query.limit);
+    const skip = Number(req.query.skip);
+
+    const condition = q ? { 'title': { '$regex': q, '$options': 'i' } } : {};
+    const totalResults = await News.countDocuments(condition);
+
     News
-        .find()
+        .find(condition, null, {
+            limit,
+            skip,
+        })
         .exec()
         .then(data => {
-            if (data.length) {
-                response(res, 200, newsBodyBuilder('All entries found', data.length, data));
-            } else {
-                response(res, 200, newsBodyBuilder('No entries found', data.length, data));
-            }
+
+            const message = data.length
+                ? 'All entries found'
+                : 'No entries found';
+
+            response(res, 200, {
+                message,
+                data,
+                totalResults,
+                limit,
+                skip,
+            });
         })
-        .catch(err => {
-            console.log(err);
-            error(err);
-        })
+        .catch(error => {
+            console.log(error);
+            response(res, 500, error);
+        });
 };

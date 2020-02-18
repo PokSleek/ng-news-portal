@@ -1,57 +1,38 @@
-import isEmpty from 'lodash/isEmpty';
+import { News } from '../../models/News/News';
+import { response } from '../utils';
 
-import { News } from "../../models/News/News";
-
-import { error, getUncorrectedFields } from './utils';
-import { newsSchema } from "../../models/News/constants";
 
 export const patchNewsById = (req, res) => {
     const { id } = req.params;
     const { data } = req.body;
 
-
-    if (isEmpty(data)) {
-        return res.status(400).json({
-            message: 'Bad request: Empty "req.body.data"',
-            data,
-        });
-    }
-
-    const uncorrectedFields = getUncorrectedFields(data, newsSchema);
-    console.log(uncorrectedFields, ' :: ', req.body);
-    if (!isEmpty(uncorrectedFields)) {
-        return res.status(400).json({
-            message: 'Bad request: uncorrected fields',
-            uncorrectedFields,
-        });
-    }
-
     News
-        .updateOne({_id: id}, {$set: data})
+        .updateOne({ _id: id }, { $set: data }, { runValidators: true })
         .exec()
         .then((log) => {
             const { n, nModified } = log;
 
+            let message;
+            let statusCode;
             if (!n) {
-                return res.status(404).json({
-                    message: `No valid entry found by ID ${id}`,
-                    log,
-                });
+                message = `No valid entry found by ID ${id}`;
+
+            } else {
+                if (!nModified) {
+                    message = `No any fields modified in the article by ID ${id}`;
+                } else {
+                    message = `Updated article with current ID: ${id}`;
+                }
             }
 
-            if (!nModified) {
-                return res.status(200).json({
-                    message: `No any fields modified in the article by ID ${id}`,
-                    log,
-                });
-            }
-            res.status(200).json({
-                message: `Updated article with current ID: ${id}`,
-                log,
+            return response(res, 200, {
+                message,
+                totalResults: n,
+                modified: nModified,
             });
         })
-        .catch(err => {
-            console.log(err);
-            error(err);
+        .catch(error => {
+            console.log(error);
+            response(res, 500, error);
         })
 };

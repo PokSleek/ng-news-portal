@@ -1,5 +1,5 @@
-import { News } from "../../models/News/News";
-import { error } from './utils';
+import { News } from '../../models/News/News';
+import { response } from '../utils';
 
 export const deleteNewsById = (req, res) => {
     const { id } = req.params;
@@ -8,21 +8,20 @@ export const deleteNewsById = (req, res) => {
         .deleteOne({_id: id})
         .exec()
         .then(log => {
-            const { deletedCount } = log;
-            if (!deletedCount) {
-                return res.status(404).json({
-                    message: `No valid entry found by ID ${id}`,
-                    log,
-                });
-            }
+            const { n, deletedCount } = log;
 
-            res.status(200).json({
-                message: `Deleted article with ID: ${id}`,
-                log,
+            const message = deletedCount
+                ? `Deleted article with ID: ${id}`
+                : `No valid entry found by ID ${id}`;
+
+            response(res, 200, {
+                message,
+                totalResults: n,
+                deletedCount,
             });
         })
-        .catch(err => {
-            console.log(err);
-            error(err);
-        });
+        .catch(error => {
+            console.log(error);
+            response(res, 500, error);
+        })
 };

@@ -1,5 +1,5 @@
-import { News } from "../../models/News/News";
-import { error } from './utils';
+import { News } from '../../models/News/News';
+import { response } from '../utils';
 
 export const getNewsById = (req, res) => {
     const { id } = req.params;
@@ -8,16 +8,16 @@ export const getNewsById = (req, res) => {
         .exec()
         .then(data => {
             if (data) {
-                res.status(200).json({
+                response(res, 200, {
                     message: `Found article with current ID: ${id}`,
                     data,
                 });
             } else {
-                res.status(404).json({ message: `No valid entry found by ID  ${id}` });
+                response(res, 200, { message: `No valid entry found by ID  ${id}` });
             }
         })
-        .catch(err => {
-            console.log(err);
-            error(err);
-        });
+        .catch(error => {
+            console.log(error);
+            response(res, 500, error);
+        })
 };

@@ -1,41 +1,37 @@
-import mongoose from 'mongoose';
-import isEmpty from 'lodash/isEmpty';
+import { Types } from 'mongoose';
 
 import { News } from '../../models/News/News';
-
-import { error, getUncorrectedFields } from './utils';
-import { newsSchema } from '../../models/News/constants'
-
+import { response } from '../utils';
 
 
 export const postNews = (req, res) => {
     const { data } = req.body;
 
     const article = new News({
-        _id: new mongoose.Types.ObjectId(),
+        _id: new Types.ObjectId(),
         source: {
-            id: data.source.id || '',
-            name: data.source.name || '',
+            id: data.source.id,
+            name: data.source.name,
         },
-        author: data.author || '',
-        title: data.title || '',
-        description: data.description || '',
-        url: data.url || '',
-        urlToImage: data.urlToImage || '',
-        publishedAt: data.publishedAt || '',
-        content: data.content || '',
+        author: data.author,
+        title: data.title,
+        description: data.description,
+        url: data.url,
+        urlToImage: data.urlToImage,
+        publishedAt: data.publishedAt,
+        content: data.content,
     });
 
     article
         .save()
         .then(data => {
-            res.status(200).json({
+            response(res, 201, {
                 message: 'Added next News article to DB',
                 data,
             });
         })
-        .catch(err => {
-            console.log(err);
-            error(err);
+        .catch(error => {
+            console.log(error);
+            response(res, 500, error);
         });
 };

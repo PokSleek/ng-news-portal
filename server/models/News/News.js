@@ -1,18 +1,49 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const NewsSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  source: {
-    id: String,
-    name: String,
+const SourceSchema = new Schema({
+  id: {
+    type: String,
+    required: [true, 'Article source id required']
   },
-  author: String,
-  title: String,
-  description: String,
-  url: String,
-  urlToImage: String,
-  publishedAt: String,
-  content: String,
+  name: {
+    type: String,
+    default: () => this.id,
+    required: [true, 'Article source name required']
+  }
+}, { _id : false });
+
+const NewsSchema = Schema({
+  _id: Schema.Types.ObjectId,
+  source: SourceSchema,
+  author: {
+    type: String,
+    required: [true, 'Article author required']
+  },
+  title: {
+    type: String,
+    required: [true, 'Article title required']
+  },
+  description: {
+    type: String,
+    required: false
+  },
+  url: {
+    type: String,
+    required: false
+  },
+  urlToImage: {
+    type: String,
+    required: false
+  },
+  publishedAt: {
+    type: String,
+    default: new Date(Date.now()).toISOString(),
+    required: [true, 'Article publishedAt required']
+  },
+  content: {
+    type: String,
+    required: [true, 'Article content required']
+  }
 });
 
-export const News = mongoose.model('Article', NewsSchema);
+export const News = model('Article', NewsSchema);
