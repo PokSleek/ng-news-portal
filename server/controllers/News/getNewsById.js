@@ -10,7 +10,7 @@ export const getNewsById = (req, res) => {
             if (data) {
                 response(res, 200, {
                     message: `Found article with current ID: ${id}`,
-                    data,
+                    data
                 });
             } else {
                 response(res, 200, { message: `No valid entry found by ID  ${id}` });
@@ -19,5 +19,5 @@ export const getNewsById = (req, res) => {
         .catch(error => {
             console.log(error);
             response(res, 500, error);
-        })
+        });
 };

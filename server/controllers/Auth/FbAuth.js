@@ -1,5 +1,5 @@
-import passport from 'passport-facebook';
 import mongoose from 'mongoose';
+import passport from 'passport-facebook';
 
 import { User } from '../../models/User/User';
 
@@ -19,25 +19,25 @@ export const setPassportFb = passport => {
                 profileFields: ['first_name', 'last_name']
             },
             (accessToken, refreshToken, profile, done) => {
-                const { first_name, last_name } = profile._json;
-                const userData = {
-                    _id: new mongoose.Types.ObjectId(),
-                    nickname: `${first_name} ${last_name}`,
-                    email: 'FACEBOOK',
-                    name: first_name,
-                    password: 'FACEBOOK',
-                };
-                new User(userData).save();
-                done(null, profile);
-            }
-        )
+	            const { first_name, last_name } = profile._json;
+	            const userData = {
+		            _id: new mongoose.Types.ObjectId(),
+		            nickname: `${first_name} ${last_name}`,
+		            email: 'FACEBOOK',
+		            name: first_name,
+		            password: 'FACEBOOK'
+	            };
+	            new User(userData).save();
+	            done(null, profile);
+            },
+        ),
     );
 
-    passport.serializeUser(function(user, done) {
-        done(null, user);
-    });
+	passport.serializeUser(function (user, done) {
+		done(null, user);
+	});
 
-    passport.deserializeUser(function(obj, done) {
-        done(null, obj);
-    });
+	passport.deserializeUser(function (obj, done) {
+		done(null, obj);
+	});
 };

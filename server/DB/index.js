@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { config } from '../config/db'
+
+import { config } from '../config/db';
 
 const { auth, name } = config;
 

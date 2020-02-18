@@ -5,7 +5,7 @@ export const deleteNewsById = (req, res) => {
     const { id } = req.params;
 
     News
-        .deleteOne({_id: id})
+        .deleteOne({ _id: id })
         .exec()
         .then(log => {
             const { n, deletedCount } = log;
@@ -17,11 +17,11 @@ export const deleteNewsById = (req, res) => {
             response(res, 200, {
                 message,
                 totalResults: n,
-                deletedCount,
+                deletedCount
             });
         })
         .catch(error => {
             console.log(error);
             response(res, 500, error);
-        })
+        });
 };

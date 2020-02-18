@@ -28,11 +28,11 @@ export const patchNewsById = (req, res) => {
             return response(res, 200, {
                 message,
                 totalResults: n,
-                modified: nModified,
+                modified: nModified
             });
         })
         .catch(error => {
             console.log(error);
             response(res, 500, error);
-        })
+        });
 };

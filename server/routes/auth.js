@@ -1,12 +1,11 @@
-
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
 
-import fbRouter from './fbAuth';
-import { getLogin, postLogin, postRegistry, logout } from '../controllers/User/User'
-
 import { setPassportLocal } from '../controllers/Auth/Auth';
+import { getLogin, logout, postLogin, postRegistry } from '../controllers/User/User';
+
+import fbRouter from './fbAuth';
 
 const router = express.Router();
 

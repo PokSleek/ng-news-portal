@@ -1,4 +1,2 @@
-module.exports = {
-    PORT : 7000,
-    DB : 'mongodb-link',
-};
+export const PORT = 7000;
+export const DB = 'mongodb-link';

@@ -1,12 +1,6 @@
 import express from 'express';
 
-import {
-    getNews,
-    getNewsById,
-    postNews,
-    patchNewsById,
-    deleteNewsById
-} from '../controllers/News'
+import { deleteNewsById, getNews, getNewsById, patchNewsById, postNews } from '../controllers/News';
 
 
 const router = express.Router();

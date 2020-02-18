@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import mongoose from 'mongoose';
 import passport from 'passport';
 
 import { User } from '../../models/User/User';
@@ -27,7 +27,7 @@ export const postRegistry = (req, res) => {
         .exec()
         .then(result => {
             if (result) {
-                return res.status(404).json({message: 'Nickname is already registered'})
+                return res.status(404).json({ message: 'Nickname is already registered' });
             } else {
                 const user = new User({
                     _id: new mongoose.Types.ObjectId(),
@@ -37,17 +37,17 @@ export const postRegistry = (req, res) => {
                     password
                 });
                 bcrypt.genSalt(10, (err, salt) =>
-                    bcrypt.hash(user.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        user.password = hash;
-                        user
-                            .save()
-                            .then(user => {
-                                res.redirect('login');
-                            })
-                            .catch(err => console.log(err));
-                    })
-                )
+	                bcrypt.hash(user.password, salt, (err, hash) => {
+		                if (err) throw err;
+		                user.password = hash;
+		                user
+			                .save()
+			                .then(user => {
+				                res.redirect('login');
+			                })
+			                .catch(err => console.log(err));
+	                })
+                );
             }
         })
         .catch(err => console.log(err));
