@@ -1,15 +1,15 @@
-import { News } from '../../models/News/News';
+import { Article } from '../../models/Article';
 import { response } from '../utils';
 
-export const getNews = async (req, res) => {
+export const getArticles = async (req, res) => {
     const { q } = req.query;
     const limit = Number(req.query.limit);
     const skip = Number(req.query.skip);
 
     const condition = q ? { 'title': { '$regex': q, '$options': 'i' } } : {};
-    const totalResults = await News.countDocuments(condition);
+    const totalResults = await Article.countDocuments(condition);
 
-    News
+    Article
         .find(condition, null, {
             limit,
             skip,

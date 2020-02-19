@@ -7,7 +7,7 @@ import { PORT } from './config/server';
 import { setUpConnection } from './DB/index';
 
 import authRoute from './routes/auth';
-import newsRoute from './routes/news';
+import articleRoute from './routes/article';
 
 const app = express();
 const db = setUpConnection();
@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 
 app.use('/auth', authRoute);
-app.use('/news', newsRoute);
+app.use('/news', articleRoute);
 
 
 app.use('/index', (req, res) => {

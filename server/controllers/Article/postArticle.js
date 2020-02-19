@@ -1,13 +1,13 @@
 import { Types } from 'mongoose';
 
-import { News } from '../../models/News/News';
+import { Article } from '../../models/Article';
 import { response } from '../utils';
 
 
-export const postNews = (req, res) => {
+export const postArticle = (req, res) => {
     const { data } = req.body;
 
-    const article = new News({
+    const article = new Article({
         _id: new Types.ObjectId(),
         source: {
             id: data.source.id,

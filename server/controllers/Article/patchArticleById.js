@@ -1,22 +1,20 @@
-import { News } from '../../models/News/News';
+import { Article } from '../../models/Article';
 import { response } from '../utils';
 
 
-export const patchNewsById = (req, res) => {
+export const patchArticleById = (req, res) => {
     const { id } = req.params;
     const { data } = req.body;
 
-    News
+    Article
         .updateOne({ _id: id }, { $set: data }, { runValidators: true })
         .exec()
         .then((log) => {
             const { n, nModified } = log;
 
             let message;
-            let statusCode;
             if (!n) {
                 message = `No valid entry found by ID ${id}`;
-
             } else {
                 if (!nModified) {
                     message = `No any fields modified in the article by ID ${id}`;

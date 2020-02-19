@@ -12,7 +12,7 @@ const SourceSchema = new Schema({
 	}
 }, { _id: false });
 
-const NewsSchema = Schema({
+const ArticleSchema = Schema({
 	_id: Schema.Types.ObjectId,
 	source: SourceSchema,
 	author: {
@@ -46,4 +46,4 @@ const NewsSchema = Schema({
 	}
 });
 
-export const News = model('Article', NewsSchema);
+export const Article = model('Article', ArticleSchema);

@@ -1,10 +1,10 @@
-import { News } from '../../models/News/News';
+import { Article } from '../../models/Article';
 import { response } from '../utils';
 
-export const getNewsById = (req, res) => {
+export const getArticleById = (req, res) => {
     const { id } = req.params;
 
-    News.findById(id)
+    Article.findById(id)
         .exec()
         .then(data => {
             if (data) {

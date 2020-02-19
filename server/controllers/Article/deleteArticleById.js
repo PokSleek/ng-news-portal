@@ -1,10 +1,10 @@
-import { News } from '../../models/News/News';
+import { Article } from '../../models/Article';
 import { response } from '../utils';
 
-export const deleteNewsById = (req, res) => {
+export const deleteArticleById = (req, res) => {
     const { id } = req.params;
 
-    News
+    Article
         .deleteOne({ _id: id })
         .exec()
         .then(log => {
