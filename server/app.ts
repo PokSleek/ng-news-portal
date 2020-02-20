@@ -1,10 +1,10 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import logger from 'morgan';
 
 import { PORT } from './config/server';
-import { setUpConnection } from './DB/index';
+import { setUpConnection } from './DB';
 
 import authRoute from './routes/auth';
 import articleRoute from './routes/article';
@@ -19,7 +19,7 @@ db.once('open', () => {
 
 app.use(cors());
 
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction): void => {
     // res.header('Access-Control-Allow-Origin', '*');
     // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header('Access-Control-Allow-Methods', '*');
@@ -34,22 +34,22 @@ app.use('/auth', authRoute);
 app.use('/news', articleRoute);
 
 
-app.use('/index', (req, res) => {
+app.use('/index', (req: Request, res: Response) => {
     res.status(200).json({ message: 'Index page' });
 });
 
-app.use((req, res, next) => {
-    const error = new Error('Content not found');
-    error.status = 404;
-    next(error);
+app.use((req: Request, res: Response, next: NextFunction) => {
+    const error = new Error('Route Not found');
+    next({
+        status: 404,
+        error
+    });
 });
 
-app.use((error, req, res, next) => {
-    res.status(error.status || 500).json({
-        error: {
-            status: error.status,
-            message: error.message
-        }
+app.use((err: { status: number, error: Error }, req: Request, res: Response) => {
+    res.status(err.status || 500).json({
+        status: err.status,
+        error: err.error
     });
 });
 

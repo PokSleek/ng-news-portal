@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.config = {
+export const config = {
     name: 'front_spot',
     collections: {
         articles: 'articles',
@@ -8,6 +6,6 @@ exports.config = {
     },
     auth: {
         user: 'Pok',
-        password: '53426'
+	    password: '53426'
     }
 };

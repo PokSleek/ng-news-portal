@@ -1,26 +1,27 @@
 import bcrypt from 'bcryptjs';
+import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import passport from 'passport';
 
-import { User } from '../../models/User/User';
+import { User } from '../../models';
 
-export const getLogin = (req, res) => {
+export const getLogin = (req: Request, res: Response) => {
     res.status(200).json({ message: 'Login page' });
 };
 
-export const logout = (req, res) => {
+export const logout = (req: Request, res: Response) => {
     req.logout();
     res.redirect('login');
 };
 
-export const postLogin = (req, res, next) => {
+export const postLogin = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('local', {
         successRedirect: '/index',
         failureRedirect: '/login',
     })(req, res, next);
 };
 
-export const postRegistry = (req, res) => {
+export const postRegistry = (req: Request, res: Response) => {
     const { nickname, name, email, password } = req.body.data;
     User
         .findOne({ nickname })
@@ -36,8 +37,8 @@ export const postRegistry = (req, res) => {
                     email,
                     password
                 });
-                bcrypt.genSalt(10, (err, salt) =>
-	                bcrypt.hash(user.password, salt, (err, hash) => {
+                bcrypt.genSalt(10, (err: Error, salt: string) =>
+	                bcrypt.hash(user.password.toString(), salt, (err: Error, hash: string) => {
 		                if (err) throw err;
 		                user.password = hash;
 		                user
@@ -50,5 +51,5 @@ export const postRegistry = (req, res) => {
                 );
             }
         })
-        .catch(err => console.log(err));
+        .catch((err: Error) => console.log(err));
 };

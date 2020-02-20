@@ -1,8 +1,10 @@
-import { Article } from '../../models/Article';
+import { Request, Response } from 'express';
+
+import { Article } from '../../models';
 import { response } from '../utils';
 
 
-export const patchArticleById = (req, res) => {
+export const patchArticleById = (req: Request, res: Response) => {
     const { id } = req.params;
     const { data } = req.body;
 

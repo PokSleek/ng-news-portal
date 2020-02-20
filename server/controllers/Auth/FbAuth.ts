@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import { PassportStatic } from 'passport';
 import passport from 'passport-facebook';
 
-import { User } from '../../models/User/User';
+import { User } from '../../models';
 
 const FbStrategy = passport.Strategy;
 
@@ -9,7 +10,7 @@ const FACEBOOK_CLIENT_ID = '459381194781039';
 const FACEBOOK_CLIENT_SECRET = 'c615dec6d7292d47b9277002ca395682';
 const FACEBOOK_CALLBACK_URL = 'http://localhost:7000/auth/fb/login';
 
-export const setPassportFb = passport => {
+export const setPassportFb = (passport: PassportStatic) => {
     passport.use(
         new FbStrategy(
             {

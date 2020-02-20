@@ -12,6 +12,9 @@ export const setUpConnection = () => {
         useNewUrlParser: true,
         dbName: name,
         auth: auth,
-    });
+    })
+        .catch((err) => {
+            console.log(err);
+        });
     return mongoose.connection;
 };

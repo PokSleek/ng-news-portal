@@ -1,18 +1,20 @@
 import { model, Schema } from 'mongoose';
+import { IArticleModel } from '../interfaces';
 
-const SourceSchema = new Schema({
+const SourceSchema: Schema = new Schema({
 	id: {
 		type: String,
 		required: [true, 'Article source id required']
 	},
 	name: {
 		type: String,
+		// @ts-ignore
 		default: () => this.id,
 		required: [true, 'Article source name required']
 	}
 }, { _id: false });
 
-const ArticleSchema = Schema({
+const ArticleSchema: Schema = new Schema({
 	_id: Schema.Types.ObjectId,
 	source: SourceSchema,
 	author: {
@@ -46,4 +48,4 @@ const ArticleSchema = Schema({
 	}
 });
 
-export const Article = model('Article', ArticleSchema);
+export const Article = model<IArticleModel>('Article', ArticleSchema);

@@ -1,7 +1,9 @@
-import { Article } from '../../models/Article';
+import { Request, Response } from 'express';
+
+import { Article } from '../../models';
 import { response } from '../utils';
 
-export const getArticleById = (req, res) => {
+export const getArticleById = (req: Request, res: Response) => {
     const { id } = req.params;
 
     Article.findById(id)
@@ -16,7 +18,7 @@ export const getArticleById = (req, res) => {
                 response(res, 200, { message: `No valid entry found by ID  ${id}` });
             }
         })
-        .catch(error => {
+        .catch((error: Error) => {
             console.log(error);
             response(res, 500, error);
         });

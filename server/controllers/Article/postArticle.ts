@@ -1,10 +1,11 @@
+import { Request, Response } from 'express';
 import { Types } from 'mongoose';
 
-import { Article } from '../../models/Article';
+import { Article } from '../../models';
 import { response } from '../utils';
 
 
-export const postArticle = (req, res) => {
+export const postArticle = (req: Request, res: Response) => {
     const { data } = req.body;
 
     const article = new Article({

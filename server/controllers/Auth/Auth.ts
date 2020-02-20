@@ -1,11 +1,12 @@
 import bcrypt from 'bcryptjs';
+import { PassportStatic } from 'passport';
 import passportLocal from 'passport-local';
 
-import { User } from '../../models/User/User';
+import { User } from '../../models';
 
 const LocalStrategy = passportLocal.Strategy;
 
-export const setPassportLocal = passport => {
+export const setPassportLocal = (passport: PassportStatic) => {
 	passport.use(
 		new LocalStrategy({ usernameField: 'nickname' }, (nickname, password, done) => {
 			User
@@ -14,8 +15,8 @@ export const setPassportLocal = passport => {
 					if (!user) {
 						return done(null, false, { message: 'This nickname is not registered' });
 					}
-
-                    bcrypt.compare(password, user.password, (err, isMatch) => {
+					// modified toString()
+                    bcrypt.compare(password, user.password.toString(), (err: Error, isMatch: boolean) => {
 	                    if (err) throw err;
 
 	                    if (isMatch) {
@@ -29,7 +30,7 @@ export const setPassportLocal = passport => {
 		}),
 	);
 
-    passport.serializeUser((user, done) => {
+    passport.serializeUser((user: any, done) => {
         done(null, user.id);
     });
 

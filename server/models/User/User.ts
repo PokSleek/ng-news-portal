@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
+import { IUser } from '../interfaces';
 
-const UserSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const UserSchema: Schema = new Schema({
+    _id: Schema.Types.ObjectId,
     nickname: {
         type: String,
         required: true,
@@ -21,4 +22,4 @@ const UserSchema = mongoose.Schema({
     },
 });
 
-export const User = mongoose.model('User', UserSchema);
+export const User = model<IUser>('User', UserSchema);
