@@ -11,14 +11,16 @@ const SOURCES_ENDPOINT = 'sources?';
 const NEWS_ENDPOINT = 'top-headlines?';
 
 @Injectable()
-export class NewsApiService {
+export class NewsApiService1 {
   public pageSize = 4;
   public page = 1;
+
   public totalArticles: number;
+  public articles: Array<ArticleModel> = [];
 
   public isCreatedByMe = false;
   public sources: Array<SourceModel> = [];
-  public articles: Array<ArticleModel> = [];
+
   public customArticles: Array<ArticleModel> = [];
   private articleInfo: { sources: string; q: string; page: number; };
 
@@ -45,7 +47,7 @@ export class NewsApiService {
         this.sources = response.sources;
         return this.sources;
       })
-      .catch(NewsApiService.handleError);
+      .catch(NewsApiService1.handleError);
   }
 
   fetchArticles(newsParams: FilterParams = { sources: 'abc-news' }): Promise<Array<ArticleModel>> {
@@ -72,74 +74,6 @@ export class NewsApiService {
         console.log(response, this.articles);
         return this.articles;
       })
-      .catch(NewsApiService.handleError);
-  }
-
-  fetchCustomNews() {
-    return this.http
-      .get('http://localhost:7000/news')
-      .toPromise()
-      .then((response: any) => {
-        console.log(response);
-        this.customArticles = response.data;
-        return response.data;
-      })
-      .catch(NewsApiService.handleError);
-  }
-
-  getArticles(): Array<ArticleModel> {
-    return this.isCreatedByMe ? this.customArticles : this.articles;
-  }
-
-  loadMore(): void {
-    if (this.isCreatedByMe) {
-
-    } else {
-      this.fetchArticles(this.articleInfo);
-    }
-  }
-
-  getArticleById(id) {
-    return this.http
-      .get(`http://localhost:7000/news/${id}`)
-      .toPromise()
-      .then((response: any) => {
-        console.log(response);
-        return response.data;
-      })
-      .catch(NewsApiService.handleError);
-  }
-
-  updateArticleById(id, data) {
-    return this.http
-    .patch(`http://localhost:7000/news/${id}`, {data})
-    .toPromise()
-    .then((response: any) => {
-      console.log(response);
-      return response.data;
-    })
-    .catch(NewsApiService.handleError);
-  }
-
-  saveArticle(data) {
-    return this.http
-      .post('http://localhost:7000/news', {data})
-      .toPromise()
-      .then((response: any) => {
-        console.log(response);
-        return response.data;
-      })
-      .catch(NewsApiService.handleError);
-  }
-
-  deleteArticle(id) {
-    return this.http
-      .delete(`http://localhost:7000/news/${id}`)
-      .toPromise()
-      .then((response: any) => {
-        console.log(response);
-        return response.data;
-      })
-      .catch(NewsApiService.handleError);
+      .catch(NewsApiService1.handleError);
   }
 }

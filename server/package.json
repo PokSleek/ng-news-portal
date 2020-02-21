@@ -2,11 +2,13 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
-    "start": "nodemon app.js --exec babel-node",
+    "dev": "tsnd --respawn app.ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint": "./node_modules/.bin/eslint app.js"
+    "eslint": "./node_modules/.bin/eslint src/**/*.ts",
+    "eslint:fix": "./node_modules/.bin/eslint src/**/*.ts --fix"
   },
   "author": "",
   "license": "ISC",
@@ -16,16 +18,30 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "lodash": "latest",
     "mongoose": "^5.7.12",
     "morgan": "^1.9.1",
-    "nodemon": "^2.0.1",
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0"
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.2",
+    "@types/express-session": "^1.15.16",
+    "@types/mongoose": "^5.7.1",
+    "@types/morgan": "^1.7.37",
+    "@types/node": "^13.7.2",
+    "@types/passport": "^1.0.2",
+    "@types/passport-facebook": "^2.1.9",
+    "@types/passport-local": "^1.0.33",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.5"
   }
 }
