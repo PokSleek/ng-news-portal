@@ -7,7 +7,8 @@
     "dev": "tsnd --respawn app.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint": "./node_modules/.bin/eslint app.ts"
+    "eslint": "./node_modules/.bin/eslint src/**/*.ts",
+    "eslint:fix": "./node_modules/.bin/eslint src/**/*.ts --fix"
   },
   "author": "",
   "license": "ISC",
